@@ -1,0 +1,21 @@
+ul li {
+    list-style: none
+}
+input[type="text"], select {
+    font-size: 18px;
+}
+
+button {
+    height: 48px;
+    border: none;
+    margin: 0 2px;
+    background: #c6b9b991;
+    padding: 0 20px;
+    border: 1px solid #cecece;
+}
+.inputForm {
+    padding: 16px 20px;
+    border: none;
+    margin: 5px;
+    border-bottom: 1px solid #c6b9b991;
+}
