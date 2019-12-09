@@ -65,6 +65,7 @@ function Form({ item, ...props }) {
                     <input
                         type="text"
                         name="name"
+                        value={item.text}
                         placeholder="Name"
                         ref={textRef}
                         onChange={updateItem}
@@ -72,6 +73,7 @@ function Form({ item, ...props }) {
                     />
                     <select
                         name="valeur"
+                        value={item.type}
                         ref={typeRef}
                         onChange={handleSelectChange}
                     >
@@ -88,6 +90,7 @@ function Form({ item, ...props }) {
                         ||
                         <input
                             type="text"
+                            value={item.value}
                             placeholder="Value"
                             ref={valueRef}
                             onChange={updateItem}

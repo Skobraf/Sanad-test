@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { removeIn, setIn, updateIn } from 'immutable';
 
 import Form from './Form/Form';
@@ -36,8 +36,11 @@ function updateChild( source, parents, id, data ) {
 }
 
 function App() {
-    const [ tree, setTree ] = useState( {} );
-
+    const initialState = () => JSON.parse(window.localStorage.getItem('tree'));
+    const [ tree, setTree ] = useState(  initialState );
+    useEffect(() => {
+      window.localStorage.setItem('tree', JSON.stringify(tree))
+    })
     const addItem = ( parents = [] ) => {
         const id = Math.random().toString( 36 ).substr( 2, 9 );
         const item = {
