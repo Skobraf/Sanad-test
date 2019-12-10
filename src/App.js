@@ -15,11 +15,12 @@ function removeChild( source, parents, id ) {
 }
 
 function addChild( source, parents, item ) {
+    console.log(parents);
     const path = parents.reduce( ( res, id ) => {
         res.push( id, 'children' );
         return res;
     }, [] );
-
+    console.log(path);
     return setIn( source, [ ...path, item.id ], item.value );
 }
 
@@ -48,7 +49,7 @@ function App() {
             parents,
             name: '',
             type: '',
-            value: null,
+            value: '',
             children: {},
         };
 
@@ -67,9 +68,14 @@ function App() {
         } );
     };
 
-    const updateItem = ( parents, id, values ) => {
+    const updateItem = ( parents, id, values, deleteChilds ) => {
+        const updates = deleteChilds ? {
+            ...values, 
+            children: {}
+        } : values;
+        
         setTree( ( tree ) => {
-            return updateChild( tree, parents, id, values );
+            return updateChild( tree, parents, id, updates );
         });
     };
 

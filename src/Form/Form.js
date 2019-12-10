@@ -2,6 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import  './form.css';
 
+function canHaveChildren(type) {
+    return type === 'array' || type === 'structure';
+};
+
 function Form({ item, ...props }) {
     
     const [ visible, setVisible ] = useState(false);
@@ -39,15 +43,16 @@ function Form({ item, ...props }) {
     };
 
     const updateItem = () => {
-        const { id, parents } = item;
-        const value = typeRef.current.value === 'array' || typeRef.current.value === 'structure' ? null :  valueRef.current.value;
+        const { id, parents, type } = item;
+        const value = typeRef.current.value === 'array' || typeRef.current.value === 'structure' ? '' :  valueRef.current && valueRef.current.value || null;
         const values = {
             type: typeRef.current.value,
             text: textRef.current.value,
             value, 
         };
 
-        props.updateItem( parents, id, values );
+        const removeChilds = canHaveChildren(type) && !canHaveChildren(typeRef.current.value);
+        props.updateItem( parents, id, values, removeChilds );
     };
 
     const handleSelectChange = (e) => {
