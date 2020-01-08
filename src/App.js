@@ -37,7 +37,7 @@ function updateChild( source, parents, id, data ) {
 }
 
 function App() {
-    const initialState = () => JSON.parse(window.localStorage.getItem('tree'));
+    const initialState = () => JSON.parse(window.localStorage.getItem('tree')) || [];
     const [ tree, setTree ] = useState(  initialState );
     useEffect(() => {
       window.localStorage.setItem('tree', JSON.stringify(tree))
