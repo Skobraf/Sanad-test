@@ -15,12 +15,10 @@ function removeChild( source, parents, id ) {
 }
 
 function addChild( source, parents, item ) {
-    console.log(parents);
     const path = parents.reduce( ( res, id ) => {
         res.push( id, 'children' );
         return res;
     }, [] );
-    console.log(path);
     return setIn( source, [ ...path, item.id ], item.value );
 }
 
@@ -37,11 +35,12 @@ function updateChild( source, parents, id, data ) {
 }
 
 function App() {
-    const initialState = () => JSON.parse(window.localStorage.getItem('tree')) || [];
-    const [ tree, setTree ] = useState(  initialState );
+    const initialState = () => JSON.parse(window.localStorage.getItem('tree')) ;
+    const [ tree, setTree ] = useState( initialState );
+    
     useEffect(() => {
-      window.localStorage.setItem('tree', JSON.stringify(tree))
-    })
+      localStorage.setItem('tree', JSON.stringify(tree));
+    },[tree])
     const addItem = ( parents = [] ) => {
         const id = Math.random().toString( 36 ).substr( 2, 9 );
         const item = {
